@@ -192,6 +192,6 @@ exports.editCmd = (rl, id) => {
 };
 exports.creditsCmd = (rl) => {
     log(`Autores de la práctica:`);
-    log(`Antonio Fernández Cáceres`, `green`);
+    log(`Antonio Fernández Cáceres (usuario Git: retonho)`, `green`);
     rl.prompt();
 };
