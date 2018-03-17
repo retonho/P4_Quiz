@@ -129,8 +129,8 @@ exports.playCmd = rl => {
                     playOne();
 
                 } else {
-                    log(`Fin del examen. Aciertos:`);
-                    biglog(`${score}`);
+                    log(`Fin del examen. Aciertos: ${score}`);
+
                     rl.prompt();
                 }
 
