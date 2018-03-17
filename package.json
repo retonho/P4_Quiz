@@ -1,0 +1,25 @@
+{
+  "name": "quiz",
+  "version": "1.0.0",
+  "description": "Proyecto Quiz",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "quiz",
+    "core",
+    "2018",
+    "node"
+  ],
+  "author": "Antonio Fernández Cáceres",
+  "license": "Unlicense",
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "figlet": "^1.2.0",
+    "is-empty-array": "^1.1.0",
+    "lower-case": "^1.1.4",
+    "trim-whitespace": "^1.3.3"
+  }
+}
