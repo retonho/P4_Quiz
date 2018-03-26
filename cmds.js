@@ -161,50 +161,77 @@ exports.testCmd = (rl, id) => {
 
 exports.playCmd = rl => {
     let score = 0;
-    const ids = model.count();
-    let toBeResolved = model.getAll();
+    let toBeResolved = [];
 
 
     /* meter if para comprobar que hay preguntas desde el principio*/
 
     const playOne = () => {
-        if (isEmptyArray(toBeResolved)) {
+
+        return Promise.resolve()
+            .then(() => {
+
+            if(toBeResolved.length <= 0){
             log(`No hay nada más que preguntar.`);
             log(`Fin del examen. Aciertos:`);
             biglog(`${score}`);
-            rl.prompt();
+            return;
+        }
+        let id = Math.floor(Math.random() * (toBeResolved.length));
+        /* Comprobación
+        log(`${toBeResolved.length}`);
+        log(`${id}`);*/
+        let quiz = toBeResolved[id];
+        toBeResolved.splice(id, 1);
+
+        return makeQuestion(rl, quiz.question)
+
+            .then(answer => {
+            respuestaCorrectaMinuscula = trim(lowerCase(quiz.answer));
+            respuestaIntroducidaMinuscula = trim(lowerCase(answer));
+
+
+        if (respuestaIntroducidaMinuscula === respuestaCorrectaMinuscula) {
+            score++;
+            log(`CORRECTO - Lleva ${score} acierto(s)`);
+            return playOne();
+
         } else {
-            let id = Math.floor(Math.random() * (toBeResolved.length));
-            /* Comprobación
-            log(`${toBeResolved.length}`);
-            log(`${id}`);*/
-            let quiz = model.getByIndex(id);
-
-            rl.question(quiz.question, respuesta => {
-                respuestaCorrectaMinuscula = trim(lowerCase(quiz.answer));
-                respuestaIntroducidaMinuscula = trim(lowerCase(respuesta));
-
-                if (respuestaIntroducidaMinuscula === respuestaCorrectaMinuscula) {
-                    score++;
-                    log(`CORRECTO - Lleva ${score} acierto(s)`);
-                    toBeResolved.pop(id);
-                    playOne();
-
-                } else {
-                    log(`INCORRECTO.`);
-                    log(`Fin del examen. Aciertos:`);
-                    biglog(`${score}`);
-                    rl.prompt();
-                }
-
-
-            });
+            log(`INCORRECTO.`);
+            log(`Fin del examen. Aciertos:`);
+            biglog(`${score}`);
         }
 
 
-    }
-playOne();
+    })
+    })
+
+
+
+}
+
+models.quiz.findAll({raw: true})
+
+    .then(quizzes => {
+    toBeResolved = quizzes;
+
+})
+.then(() => {
+    return playOne();
+
+})
+.
+catch(error => {
+    errorlog(error.message);
+})
+.then(() => {
+    console.log('Fin.');
+console.log('Tu resultado es: ' + score);
+rl.prompt();
+})
 };
+
+
 exports.deleteCmd = (rl, id) => {
 
     validateId(id)
