@@ -67,7 +67,8 @@ models.quiz.findAll()
 
  .catch(error => {
  errorlog(socket, error.message);
- });
+ })
+
  .then(() => {
  rl.prompt();
 });
