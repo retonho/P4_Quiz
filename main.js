@@ -29,7 +29,7 @@ return [hits.length ? hits : completions, line];
 
 socket
     .on("end", () =>{ rl.close(); })
-    .on("error", () =>{ rl.close(); })
+    .on("error", () =>{ rl.close(); });
 
 
 rl.prompt();
@@ -78,15 +78,16 @@ switch(cmd) {
         break;
 
     default:
-        console.log(socket, `Comando desconocido: '${colorize(cmd, 'red')}'`);
-        console.log(socket, `Use ${colorize('help', 'green')} para ver todos los comandos disponibles`);
+        log(socket, `Comando desconocido: '${colorize(cmd, 'red')}'`);
+        log(socket, `Use ${colorize('help', 'green')} para ver todos los comandos disponibles`);
         rl.prompt();
         break;
 }
 
 })
+
 .on('close', () => {
-    log(socket, 'Adios');
+    log(socket,'Adios');
 //process.exit(0);
 });
 
