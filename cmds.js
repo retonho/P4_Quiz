@@ -294,6 +294,6 @@ exports.editCmd = (socket, rl, id) => {
 };
 exports.creditsCmd = (socket, rl) => {
     log(socket, `Autores de la práctica:`);
-    log(socket, `Antonio Fernández Cáceres (usuario Git: retonho)`, `green`);
+    log(socket, `ANTONIO Fernández Cáceres (usuario Git: retonho)`, `green`);
     rl.prompt();
 };
