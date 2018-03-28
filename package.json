@@ -20,6 +20,7 @@
     "figlet": "^1.2.0",
     "is-empty-array": "^1.1.0",
     "lower-case": "^1.1.4",
+    "net": "^1.0.2",
     "promise": "^8.0.1",
     "sequelize": "^4.37.2",
     "sqlite3": "^4.0.0",
